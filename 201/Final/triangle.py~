@@ -1,0 +1,28 @@
+# Make a triangle using recursion
+
+def tri(height):
+    # BASE CASE
+    # if on last row
+    if height == 1:
+        print("X")
+        return 0    
+
+    ################################
+    # RECURSIVE CASE
+    # if more rows to make
+    if height > 1:
+        # create row
+        for i in range(height):
+            print("X" end="")
+        print("X")
+
+        # next level
+        tri(height - 1)
+
+def main():
+    
+    # get input
+    size = int( input("Height: "))
+
+    # make triangle
+    tri(size)

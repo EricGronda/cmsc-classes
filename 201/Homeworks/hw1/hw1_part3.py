@@ -1,0 +1,8 @@
+# File:        hw1_part3.py
+# Author:      Eric Gronda
+# Date:        9/11/17
+# Section:     01
+# Description: Asks the user for name of their dog, then prints out that the dog is a good dog
+
+dogName = input("What is the name of your dog? ")
+print(dogName , "is a good dog!")

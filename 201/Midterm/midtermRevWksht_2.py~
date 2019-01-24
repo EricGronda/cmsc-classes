@@ -1,0 +1,5 @@
+def main():
+    myList = [2 , 3 , 5 , 7]
+    print(len(myList)):
+    index = 0
+    while(index < len(myList)):

@@ -1,0 +1,16 @@
+# File:        hw1_part3.py
+# Author:      Eric Gronda
+# Date:        9/17/17
+# Section:     01
+# E-mail:      gt32930@umbc.edu
+# Description: Simulates a simple deli order
+
+def main():
+
+
+    print("Choose 'ham', 'cheese', or 'veggie' for your sandwich")
+    sandwich = input("Please choose a sandwich: ")
+
+    #dave
+
+main:

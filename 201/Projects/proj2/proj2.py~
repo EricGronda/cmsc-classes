@@ -1,0 +1,275 @@
+# File:    proj2.py
+# Author:  Eric Gronda
+# Date:    11/10/17
+# Section: 06
+# E-mail:  gt32930@umbc.edu
+# Description:
+#    Project 2: Game of Life has different "alive" and "dead" cells based on
+#    the surrounding cells. Cells may die or live on to the next iteration
+
+# CONSTANTS
+
+ROW_MIN = 1
+COL_MIN = 1
+
+ROW = "rows"
+COL = "columns"
+
+QUIT = "q"
+NO_MAX = ""
+
+ITERATE_MIN = 0
+
+DEAD = "."
+ALIVE = "A"
+
+###############################################################################
+# getValidInput() makes sure the user enters a valid number based on the
+#                 minimum and maximum values
+# Input:          prompt; string to use when assking for an input
+#                 bounds; string to indicate range of values
+#                 minn; min value the input can be
+#                 maxx; max value the input can be
+# Output:         userVal; a validated value
+def getValidInput(prompt , bounds , minn , maxx):
+    # prompt user to enter a value
+    userVal = input(prompt)
+
+    invalidMsg = "\tThat is not a valid value; please enter a number"
+    
+    # until the input is valid, reprompt
+    validVal = False
+    while validVal == False:
+        validVal = True
+        
+        # if user wants to quit
+        if userVal == QUIT:
+            validVal = True
+    
+        # if user does not want to quit
+        else:
+            # convert userVal to integer
+            userVal = int(userVal)
+            
+            # if userVal is less than the minimum, reprompt
+            if userVal < minn:
+                validVal = False
+                print(invalidMsg)
+                print("\t" + bounds)
+                userVal = input(prompt)
+            
+            # check if userVal fits the max condition
+            else:
+                # if there is no max
+                if maxx == NO_MAX:
+                    validVal = True
+
+                # if value is greater than max, reprompt
+                elif userVal > maxx:
+                    validVal = False
+                    print(invalidMsg)
+                    print("\t" + bounds)
+                    userVal = input(prompt)
+                
+    return userVal
+
+###############################################################################
+# make2DList() uses for loops to create a 2D list
+# Input:       rowNum; length of the first layer of the 2D list
+#              colNum; length of the second layer of the 2D list
+# Output:      list2D; 2D list with lengths of rowNum and colNum
+def make2DList(rowNum , colNum):
+    boardList = []
+
+    # layer 1 of 2D list
+    for a in range(rowNum):
+        boardList.append([])
+
+        # layer 2 of 2D list
+        for b in range(colNum):
+            boardList[a].append(DEAD)
+
+    return boardList
+
+###############################################################################
+# makeBoard() makes the starting board for the game
+# Input:      list2D; 2D list that gives rows and columns
+#             row; row of cell to make alive
+#             col; column of cell to make alive
+# Output:     board; 2D list of starting game board
+def makeBoard(numRows , numCols , board):
+    # initialize phrases
+    promptRow = "\nPlease enter the row of a cell to turn on (or q to exit): "
+    promptCol = "Please enter a column for that cell: "
+    boundRow = "between 0 and " + str(numRows - 1) + " inclusive..."
+    boundCol = "between 0 and " + str(numCols - 1) + " inclusive..."
+    
+    row = ""
+
+    # while user does not want to quit
+    while row != QUIT:
+        row = getValidInput(promptRow , boundRow , 0 , numRows - 1)
+        
+        # get the column value
+        if row != QUIT: 
+            col = getValidInput(promptCol , boundCol , 0 , numCols - 1)
+            board[row][col] = ALIVE
+
+    return board
+
+###############################################################################
+# printBoard() prints the current game board
+# Input:       board; 2D list of current game board
+# Output:      None
+def printBoard(board):
+
+    # first layer of board
+    for a in range(len(board)):
+        
+        # second layer of board
+        for b in range(len(board[a])):
+            
+            if b < len(board[a]) - 1:
+                print(board[a][b], end = "")
+            else:
+                print(board[a][b])
+
+###############################################################################
+# checkNeighbors() checks the neighbors of a cell in a 2D list
+# Input:           board; 2D list for current game board
+#                  row; row of the cell
+#                  col; column of the cell
+# Output:          neighbors; number of alive neighbors of cell
+def checkNeighbors(board , row , col):
+    rowUp = row - 1
+    rowDown = row + 1
+    colLeft = col - 1
+    colRight = col + 1
+
+    neighbors = 0
+
+    # neighbors left
+    if (colLeft) >= 0:
+        if board[row][colLeft] == ALIVE:
+            neighbors += 1
+                    
+    # neighbors right
+    if (colRight) < len(board[row]):
+        if board[row][colRight] == ALIVE:
+            neighbors += 1
+        
+    # neighbors up
+    if (rowUp) >= 0:
+        if board[rowUp][col] == ALIVE:
+            neighbors += 1
+                    
+        # neighbors up-left
+        if (colLeft) >= 0:
+            if board[rowUp][colLeft] == ALIVE:
+                neighbors += 1
+                        
+        # neighbors up-right
+        if (colRight) < len(board[row]):
+            if board[rowUp][colRight] == ALIVE:
+                neighbors += 1
+        
+    # neighbors down
+    if (rowDown) < len(board):
+        if board[rowDown][col] == ALIVE:
+            neighbors += 1
+               
+        # neighbors down-left
+        if (colLeft) >= 0:
+            if board[rowDown][colLeft] == ALIVE:
+                neighbors += 1
+                            
+        # neighbors down-right
+        if (colRight) < len(board[row]):
+            if board[rowDown][colRight] == ALIVE:
+                neighbors += 1
+                            
+    return neighbors
+
+###############################################################################
+# nextIteration() changes the game board based on the alive criteria
+# Input:          board; 2D list for current game board
+# Output:         newBoard; 2D list for the next iteration
+#------------------------------------------------------------------------------
+# Alive Criteria:
+#     - any live cell with fewer than 2 live neighbors dies
+#     - any live cell with 2 or 3 live neighbors lives
+#     - any live cell with more than 3 neighbors dies
+#     - any dead cell with exactly 3 live neighbors becomes alive
+#------------------------------------------------------------------------------
+def nextIteration(board):
+    newBoard = board[:]
+
+    # iterate over rows
+    for a in range(len(board)):
+        newBoard[a] = board[a][:]
+
+        # iterate over columns
+        for b in range(len(board[a])):
+            newBoard[a][b] = board[a][b][:]
+            
+            # get number of neighbors
+            neighbors = checkNeighbors(board , a , b)
+
+            # find a living cell
+            if board[a][b] == ALIVE:
+                # see if cell should live based on alive criteria
+                if neighbors < 2:
+                    newBoard[a][b] = DEAD
+                elif neighbors == 2 or neighbors == 3:
+                    newBoard[a][b] = ALIVE
+                elif neighbors > 3:
+                    newBoard[a][b] = DEAD
+                
+            # find a dead cell
+            if board[a][b] == DEAD:
+                # see if cell should become alive based on alive criteria
+                if neighbors == 3:
+                    newBoard[a][b] = ALIVE
+
+    return newBoard
+
+def main():
+    # get the number of rows and columns for the board
+    promptRow = "Please enter the number of rows:    "
+    promptCol = "Please enter the number of columns: "
+    bounds = "greater than or equal to 1"
+    numRows = getValidInput(promptRow , bounds , 1 , NO_MAX)
+    numCols = getValidInput(promptCol , bounds , 1 , NO_MAX)
+
+    # make a list out of the rows columns ( list2D[row][column] )
+    board = make2DList(numRows , numCols)
+
+    # get the rows and columns  of cells to make alive
+    makeBoard(numRows , numCols, board)
+
+    # get the number of iterations
+    promptIter = "\nHow many iterations should I run? "
+    boundIter = "greater than or equal to 0"
+    iterNum = getValidInput(promptIter , boundIter, 0 , NO_MAX)
+        
+    # display starting board
+    print("Starting board:\n")
+    printBoard(board)
+    
+    # if user wants to iterate at least once
+    if iterNum >= 1:
+        # do first iteration
+        newBoard = nextIteration(board)
+        print("\nIteration 1:\n")
+        printBoard(newBoard)
+
+        # iterate for the rest of iterations
+        for i in range(1 , iterNum):
+            # iterate to next board
+            print("\nIteration " + str(i + 1) + ":\n")
+            newBoard = nextIteration(newBoard)
+            
+            # display current board
+            printBoard(newBoard)
+
+main()

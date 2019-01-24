@@ -1,0 +1,40 @@
+#File: hw4_part7.py
+#Author: Eric Gronda
+#Date: 10/6/17
+#Section: 06
+#E-mail: gt32930@umbc.edu
+#Description: Create a grocery list that prevents duplication
+
+
+STOP = "STOP"
+
+def main():
+
+
+    groceries = []
+
+    item = ""
+
+    while(item != STOP):
+        item = input("Please enter a grocery item ('STOP' to exit): ")
+        groceries.append(item)
+        length = len(groceries) - 1
+
+        count = 0
+        while(count < length):
+            if(item != groceries[count]):
+                groceries.append(item)
+            else:
+                print("Error: The item" , item , "is already in the list.")
+                groceries.remove(item)
+            count += 1
+    
+    print("There are" , length , "groceries in your list:")
+    
+    index = 0
+
+    while(index < length):
+        print(groceries[index])
+        index += 1
+
+main()

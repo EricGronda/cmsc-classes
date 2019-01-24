@@ -1,0 +1,86 @@
+# File: hw4_part5.py
+# Author: Eric Gronda
+# Date: 10/3/17
+# Section: 06
+# E-mail: gt32930@umbc.edu
+# Description: Checks validity of user's PIN
+
+
+#CHECK FOR ZEROS, DON'T REMOVE THEM!!!!
+
+
+def main():
+
+
+#Get Pin and Account info
+
+    pinNum = input("Please enter a pin: ")
+    accountType = input("Please enter the account type (c, d, or s): ")
+    validPin = False
+
+#Phrases
+
+    shortC = "is too short for a checking account."
+    longC = "is too long for a checking account."
+    shortD = "is too short for a debit account."
+    longD = "is too long for a debit account."
+    shortS = "is too short for a savings account."
+    longS = "is too long for a savings account."
+
+#Check account type
+    
+    #Checking and Debit
+    if(accountType == "c" or accountType == "d"):
+        
+        #4 digits
+        while(validPin == False):
+            validPin = True
+            
+            #Less than 4
+            if(len(pinNum) < 4):
+                validPin = False
+                
+                #Credit Statement
+                if(accountType == "c"):
+                    print("The PIN" , pinNum , shortC)
+                
+                #Debit Statement
+                elif(accountType == "d"):
+                    print("The PIN" , pinNum , shortD)
+
+            #Greater than 4
+            elif(len(pinNum) > 4):
+                validPin = False
+
+                #Credit Statement
+                if(accountType == "c"):
+                    print("The PIN" , pinNum , longC)
+
+                #Debit Statement
+                elif(accountType == "d"):
+                    print("The PIN" , pinNum , longD)
+
+            #Leading zeros
+            if(pinNum[0 : 0] == "0"):
+                validPin = False
+                print("The PIN" , pinNum , "ends in a zero.")
+
+            #Ends in zero
+            elif(pinNum[ : (len(pinNum) - 1)] == "0"):
+                validPin = False
+                print("The PIN" , pinNum , "ends in a zero.")
+
+            #Get new input if validPin is False
+            if(validPin == False):
+               pinNum = input("Please enter a pin: ")
+
+
+        
+    #Debit
+    #elif(accountType == "d"):
+        
+        
+    #Savings
+        
+
+main()

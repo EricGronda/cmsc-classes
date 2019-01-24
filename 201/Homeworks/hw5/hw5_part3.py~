@@ -1,0 +1,36 @@
+# File: hw5_part3.py
+# Author: Eric Gronda
+# Date: 10/8/17
+# Section: 06
+# E-mail: gt32930@umbc.edu
+# Description: Checks grammar of a sentence (start capital, end punctuation)
+
+################################################################################
+# checkCapital()   checks for a capital letter at the start of a sentence
+# Input:           sentence; sentence being searched for a capital letter
+# Output:          Error message appears if sentence does not start with capital
+################################################################################
+def checkCaptial(sentence)
+
+################################################################################
+# checkPunctuation()  checks for punctuation at end of sentence
+# Input:              sentence; sentence being searched for puntation
+# Output:             Error message if no punctuation at end of sentence
+################################################################################
+def checkPunctuation(sentence)
+
+################################################################################
+# main()    Executes main program
+#           Gathers sentence until user quits
+# Input:    None
+# Output:   None
+################################################################################
+END = ""
+def main():
+    sentence = "placeholder"
+    while(sentence != END):
+        sentence = input("Enter a sentence (enter nothing to quit): ")
+        checkCapital(sentence)
+        checkPunctuation(sentence)
+
+main()

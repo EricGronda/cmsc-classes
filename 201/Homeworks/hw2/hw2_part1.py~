@@ -1,0 +1,27 @@
+# File:        hw1_part1.py
+# Author:      Eric Gronda
+# Date:        9/17/17
+# Section:     01
+# E-mail:      gt32930@umbc.edu
+# Description: Simulates a "procrastination reprimand"
+
+def main():
+
+
+    designDays = int(input("How many days were left when you started the design? "))
+    projectDays = int(input("How many days were left when you started the project? "))
+
+
+
+    if (designDays <= 0) or (projectDays <= 0):
+        print("Why would you wait so long!? :(")
+
+    elif (designDays == 6) and (10 <= projectDays <= 13):
+        print("Wow, you started early! Good job! :)")
+
+    else:
+        print("Good luck on the project! You can do it!")
+
+
+
+main()

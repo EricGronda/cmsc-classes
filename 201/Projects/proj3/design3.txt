@@ -1,0 +1,76 @@
+# File:    design3.txt
+# Author:  Eric Gronda
+# Date:    11/27/17
+# Section: 06
+# E-mail:  gt32930@umbc.edu
+# Description:
+#     Design file for Project 3: Maze Solver
+
+# CONSTANTS
+
+TOP    = 0
+BOTTOM = 1
+LEFT   = 2
+RIGHT  = 3
+
+##########################################################################
+# getValidInput() determines whether a number is between a maximum
+#                 and a minimum value by re-prompting
+# Input:          minn; an int, a minimum value for the number
+#                 maxx; an int, a maximum value for the number
+#                 num;  an int, number to be validated
+# Output:         num;  an int, the validated number
+
+##########################################################################
+# makeList() converts a string of integers into a list
+# Input:     string;  a string,string to be split into a list of numbers
+# Output:    numList; a list, list of integers
+
+##########################################################################
+# deepCopy() deep copies a 2D list
+# Input:     list2D;   2D list to be copied
+# Output:    deepList; deep copy of list2D
+
+##########################################################################
+# readMaze() reads in the maze specification from the filename specified
+#            and returns a maze data structure
+# Input:     filename; name of the file to read in maze data
+# Output:    maze; 3D list of the maze
+
+##########################################################################
+# searchMaze() uses recursion to find a solution path to maze
+# Input:       maze; 3D list of the maze
+#              ???
+# Output:      path; complete solution path (if none found, then
+#                    value of None)
+
+
+##########################################################################
+# results() displays results of the maze search
+# Input:    path; complete solution path
+# Output:   None (prints to the screen)
+
+
+def main():
+
+    # display opening statement
+    print()
+
+    # get name of file to read in the maze
+    fileName = input()
+    # create a 3D list of the maze
+    readMaze()
+
+    # get starting row and column
+    row = input()
+    row = getValidInput()
+    col = input()
+    col = getValidInput()
+
+    # search the maze for a solution
+    searchMaze()
+
+    # display results
+    results()
+
+main()

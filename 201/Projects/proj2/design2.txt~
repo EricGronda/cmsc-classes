@@ -1,0 +1,47 @@
+# File:    design2.txt
+# Author:  Eric Gronda
+# Date:    10/30/17
+# Section: 06
+# E-mail:  gt32930@umbc.edu
+# Description:
+#    Design file for Project 2: Game of Life
+
+# CONSTANTS
+
+ROW_MIN = 1
+COL_MIN = 1
+
+QUIT = "q"
+
+NO_MAX = 
+
+ITERATE_MIN = 0
+
+DEAD = "."
+ALIVE = "A"
+
+###############################################################################
+# getValidNum() makes sure the user enters a valid number based on the
+#                 minimum and maximum values
+# Input:          userNum; user entered number
+#                 minn; minimum value that userNum can be
+#                 maxx; maximum value that userNum can be
+#                 prompt; a message displayed to clarify bounds
+# Output:         validNum; a validated number
+
+###############################################################################
+# make2DList() uses for loops to create a 2D list
+# Input:       rowNum; length of the first layer of the 2D list
+#              colNum; length of the second layer of the 2D list
+# Output:      list2D; 2D list with lengths of rowNum and colNum
+
+def main():
+    # get the number of rows for the board
+    getValidInput()
+    # get the number of columns for the board
+    getValidInput()
+
+    # make a list out of the rows columns ( list2D[row][column] )
+    make2DList()
+
+    

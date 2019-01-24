@@ -1,0 +1,10 @@
+Laika,unknown,female,3,50
+Goddard,robot,male,4,61
+Togo,Siberian Husky,male,16,8
+Balto,Siberian Husky,male,14,9
+Hachiko,Akita Inu,male,11,9
+Buddy,Labrador Retriever,male,4,22
+Bo,Portuguese Water Dog,male,9,11
+Argos,Kritikos Lagonikos,male,21,7
+Lady,Pomeranian,female,5,20
+Nipper,Terrier,male,11,17

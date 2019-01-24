@@ -1,0 +1,29 @@
+# File: hw5_part4.py
+# Author: Eric Gronda
+# Date: 10/10/17
+# Section: 06
+# E-mail: gt32930@umbc.edu
+# Description: Gets a number and checks the properties of it
+
+################################################################################
+# checkOddOrEven()    check if number is odd or even
+# Input:              userNum; an integer
+# Output:             None
+def checkOddOrEven(userNum):
+
+################################################################################
+# checkPositive()     check if number is negative, positive, or zero
+# Input:              userNum; an integer
+# Output:             None
+def checkPostive(userNum):
+
+################################################################################
+# checkDivisible()    check if the number is divisible by a second number
+# Input:              userNum; an integer
+# Output:             None
+def checkDivisible(userNum):
+
+def main():
+
+
+main():

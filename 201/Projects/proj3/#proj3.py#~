@@ -1,0 +1,153 @@
+# File:    proj3.py
+# Author:  Eric Gronda
+# Date:    11/27/17
+# Section: 06
+# E-mail:  gt32930@umbc.edu
+# Description:
+#     Project 3: Maze Solver imports data from a file, converts it into
+#     a maze, then finds a complete solution path
+
+# CONSTANTS
+
+RIGHT  = 0 
+BOTTOM = 1
+LEFT   = 2
+TOP    = 3
+
+##########################################################################
+# getValidInput() determines whether a number is between a maximum
+#                 and a minimum value by re-prompting
+# Input:          minn; an int, a minimum value for the number
+#                 maxx; an int, a maximum value for the number
+#                 num;  an int, number to be validated
+# Output:         num;  an int, the validated number
+def getValidInput(minn , maxx , num):
+    prompt =  "Invalid, enter a number between "
+    prompt += str(minn) + " and " + str(maxx) + " (inclusive): "
+
+    # if number is out of bounds, reprompt
+    if num > maxx or num < minn:
+        validNum = False
+        while validNum == False:
+            validNum = True
+
+            # reprompt if num is out of bounds
+            if num > maxx or num < minn:
+                validNum = False
+                num = int(input(prompt))
+    
+    return num
+
+##########################################################################
+# makeList() converts a string of integers into a list by 
+#            breaking over whitespace
+# Input:     string;  a string, string to be split into a list of numbers
+# Output:    numList; a list, list of integers
+def makeList(string):
+    # remove whitespace by splitting
+    numList = string.strip().split()
+
+    # convert all nums in list to integers
+    for i in range( len(numList) ):
+        numList[i] = int(numList[i])
+
+    return numList
+
+##########################################################################
+# createMaze() creates a 3D list structure for the maze
+# Input:       squareList; a 2D list containing locations of walls
+#              numRows;    an int, number of rows in the maze
+#              numCols;    an int, number of columns in the maze
+# Output:      maze;       a 3D list containing square locations
+#                          by row and column
+def createMaze(squareList , numRows , numCols):
+    # create empty maze list
+    maze = []
+
+    # split squareList into lists of rows
+    ###row = []
+    ###for i in range( numCols ):
+        ###row = squareList[ i:numCols ]
+
+    # append lists of rows to maze
+
+##########################################################################
+# readMaze() reads in the maze specification from the filename specified
+#            and returns a maze data structure
+# Input:     filename; name of the file to read in maze data
+# Output:    maze;     3D list of the maze
+def readMaze(filename):
+    # open file
+    ifp = open(filename , "r")
+
+    # first line contains number of rows and columns ( [row , col] )
+    dimensions = makeList( ifp.readline() )
+    numRows    = dimensions[0]
+    numCols    = dimensions[1]
+    # second line specifies finish row and column
+    finish = makeList( ifp.readline() )
+
+    # READ IN SQUARES SEPARATELY, THEN BUNCH INTO ROWS
+    
+    # create list for maze
+    maze = []
+
+    # add rows
+    for i in range( numRows ):
+        maze.append([])
+        # add squares
+        for j in range( numCols ):
+            square = makeList( ifp.
+            maze[i].append( square )
+
+    # remaining lines specify wall layout for each square in the maze
+    ###walls = ifp.readlines()
+    # convert into list of integers
+    ###for i in range( len(walls) ):
+        ###walls[i] = makeList(walls[i])
+
+    # close file
+    ifp.close()
+
+    # make 3D list of maze
+    ###maze = createMaze(walls , dimensions[0] , dimensions[1])
+
+##########################################################################
+# searchMaze() uses recursion to find a solution path to maze
+# Input:       maze; 3D list of the maze
+#              ???
+# Output:      path; complete solution path (if none found, then
+#                    value of None)
+
+
+##########################################################################
+# results() displays results of the maze search
+# Input:    path; complete solution path
+# Output:   None (prints to the screen)
+
+
+def main():
+
+    # display opening statement
+    print("Welcome to the Maze Solver!")
+
+    # get name of file to read in the maze
+    fileName = input("Please enter the filename of the maze: ")
+    # create a 3D list of the maze
+    maze    = readMaze(fileName)
+    numRows = len( maze )
+    numCols = len( maze[0] )
+
+    # get starting row and column
+    ###row = int(input("Please enter the starting row: "))
+    ###row = getValidInput( 0 , numRows , row )
+    ###col = int(input("Please enter the starting column: "))
+    ###col = getValidInput( 0 , numCols , col)
+
+    # search the maze for a solution
+    ###searchMaze()
+
+    # display results
+    ###results()
+
+main()

@@ -1,0 +1,154 @@
+# File:    design1.txt
+# Author:  Eric Gronda
+# Date:    10/20/17
+# Section: 14
+# E-mail:  gt32930@umbc.edu 
+# Description:
+#   Desgin file for project 1, which either searches through a library of songs
+#   or creates a playlist from that library using specific categories.
+
+# main menu options
+USER_QUIT    = -1
+MENU_SEARCH  = 0
+MENU_CREATE  = 1
+
+MAX_SONG_NUM = 10  # maximum number of songs in a playlist
+
+# these constants are used to give names to the columns of the 2D list
+YEAR     = 0
+ARTIST   = 1
+TITLE    = 2
+GENRE    = 3
+DURATION = 4
+TEMPO    = 5
+
+DETAIL_MIN = YEAR   # minimum value; used for getValidInput()
+DETAIL_MAX = TEMPO  # maximum value
+
+# constants for the playlist types
+PLAY_YEAR = 1
+PLAY_ARTIST = 2
+PLAY_GENRE = 3
+
+############################################################################
+# make2DList() constructs a 2D list from a file that contains information
+#              about songs in a music library, such as year and artist
+# Input:       filename;   a string of the music library's file name
+# Output:      resultList; a 2D list of that file in the format below
+
+#################################################################################
+# displayMainMenu() displays the main mmenu for the program, containing the
+#                   choice to either search for a song or create a playlist
+# Input:            None
+# Output:           None
+
+##################################################################
+# getValidInput() gets a valid integer from the user that
+#                 falls within the appropriate range; uses
+#                 a prompt provided at function call
+# Input:          prompt;  a string to use when asking for input
+#                 minimum; a minimum integer
+#                 maximum; a maximum integer
+# Output:         userInput; an integer within the range
+
+#################################################################################
+# displayOptions() displays the different categories to choose from when
+#                  searching for a song
+# Input:           None
+# Output:          None
+
+#################################################################################
+# playlistTypes() displays different types of playlists
+# Input:          None
+# Output:         None
+
+#################################################################################
+# colToString() converts the column choice number to a string
+# Input:        colNum; user entered column choice number
+# Output:       colStr; string of column choice number
+
+#################################################################################
+# stringInput() prompts a string (row) based on column choise of the user
+# Input:        None
+# Output:       None
+
+#################################################################################
+# checkEqual() checks for equivalence of two arguments (user's row to list's row)
+# Input:       userRow; user entered value for the row of songs
+#              listRow; string in songs list to test equivalence
+# Output:      equivString; True or False value based on equivalence of userRow
+#              and listRow
+
+#################################################################################
+# matchSongs() iterates over a list and uses checkEqual() to determine which
+#              songs will be added to a list of matchedSongs
+# Input:       userRow; user entered value for the row of songs
+#              songs; 2D list of songs used to search through
+#              column; choice of column entered by user
+# Output:      matchedSongs; songs that match the users column and row
+
+#################################################################################
+# displaySongs() displays final result of songs from a list songList
+# Input:         songList; list of songs that match input of the user
+# Output:        None
+
+def main():
+    # get the filename from the user
+    # call the provided make2DList function to read in songs
+    songs = make2DList
+
+    # create prompt for menu choice
+    # display the main menu options
+    displayMainMenu()
+    # priming read for getting menu choice
+    getValidInput()
+
+    # while menu choice != -1 (for QUIT)
+     
+	# if they want to search
+
+	    # create prompt for column choice
+	    # display the search options
+	    displayOptions()
+	    # get column choice from user
+	    getValidInput()
+	    # convert choice number to a string
+	    colToString()
+  
+	    # Prompt string (row) based on the column choice
+	    stringInput()
+
+	    # iterate over list (row), checking to see if search input is
+	    # equivalent to any strings
+	    # checkEqual() used in matchSongs()
+	    matchSongs()
+
+	    # display list of songs found under search
+	    displaySongs()
+
+	# if they want to create a playlist
+
+	    # prompt for playlist type
+	    # display the playlist options
+	    playlistTypes()
+	    # get playlist type from the user
+	    getValidInput()
+	    # convert choice number to a string
+	    colToString()
+
+	    # get input for length of playlist
+	    getValidInput()
+	    
+	    # specify string for playlist type
+	    stringInput()
+	    # iterate over list, searching for equivalent strings
+	    # checkEqual() used in matchSongs()
+	    # and adds matching songs to a list
+	    matchSongs()
+	    
+	    # display list of songs
+	    displaySongs()
+
+	# display closing message
+
+main()

@@ -1,0 +1,13 @@
+# File:        hw1_part7.py
+# Author:      Eric Gronda
+# Date:        9/11/17
+# Section:     01
+# Description: Asks the user for ratings about a restaurant they've eaten at and prints out a summary of their experience.
+
+foodRating = float(input("How would you rate the food? (1-5) "))
+servRating = float(input("How would you rate the service? (1-5) "))
+atmoRating = float(input("How would you rate the atmosphere? (1-5) "))
+
+overallRating = (foodRating + servRating +atmoRating) / 3
+
+print("Your overall experience was" , overallRating , "stars.")

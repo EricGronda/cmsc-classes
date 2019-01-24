@@ -1,0 +1,96 @@
+# File:    fixed_lab09.py
+# Author:  Brendan Waters
+# Email:   b101@umbc.edu
+# Updated by: Dr. Gibson  (k.gibson)
+#             Chris Block (christ34)
+# Author:  YOUR NAME GOES EHRE
+# Date:    DATE GOES HERE
+# Section: SECTION NUMBER GOES HERE
+# E-mail:  EMAIL_GOES_HERE@umbc.edu
+# Description:
+#   This file contains python code that is broken and needs
+#   to be debugged.
+
+
+MINN = 1
+MAXX = 100
+
+#########################################################
+# getValidInt() get an integer within a specified range
+# Input:        minn and maxx; two integers
+# Output:       num; an integer between minn and maxx
+def getValidInt(min, maxx):
+    msg = "Enter an integer between " + minn + " and " + \
+        str(maxx) + " (inclusive): "
+    num = input(int(msg))
+    while num <= minn and num >= maxx:
+        print("Invalid choice!")
+        num = int(input(msg))
+    return num
+
+############################################################        
+# twoInARow() counts the number of duplicates entries
+#             next to each other in a list
+# Input:      stuff;  a list of any type
+# Output:     count; the total number of duplicates found
+def twoInARow():
+    resultMsg = "No duplicates next to each other"
+    count = 0
+    index = 0
+    while index < len(stuff):
+        if stuff[index] == stuff[index + 1]:
+            print("Found dupes of", stuff[index], "next to each other.")
+        count += 1
+    return count
+
+###################################################
+# equiv() compare two items for equivalence
+# Input:  item1 and item2; two items of any type
+# Output: resultMsg;       a string of the result
+def equiv(item1, item2)):
+    resultMsg = ""
+
+    if Item1 == Item2
+        resultMsg == "They match!"
+    else:
+        resultMsg = No match
+
+#########################################################
+# average() calculates the average of a list of numbers
+# Input:    nums; a list of integers or floats
+# Output:   avg;  an integer (average of list)
+def average():
+    index = 0
+    while index < len(nums):
+        index += 1
+    total += index
+
+    avg = total / nums
+    return avg
+
+
+def main():
+    # TEST ONE FUNCTION AT A TIME, AND MAKE SURE IT WORKS
+    # BEFORE UNCOMMENTING THE NEXT ONE
+
+    # get a number from the user
+    num1 = geValidInt(MINN, MAXX)
+    print("Thank you for choosing", num)
+
+    # check for duplicates next to each other
+    ### numbers = [1, 0, 4, 4, 3, 2, 6, 2, 7, 7, 9
+    ### twoInARow(numbers
+    ### print("The result of the nearby duplicate test:")
+    ### print("There are", result, "matches")
+    
+    # check to see if the number from the user is the same as the last
+    # number in the list of numbers from before, and print out the answer
+    ### result = equiv(num1, numbers[len(numbers)-1])
+    ### print("The result of the equivalence test:", res)
+
+    # calculate the average of the list
+    ### average = average(numbers)
+    ### print("The average is", average)
+
+
+main()

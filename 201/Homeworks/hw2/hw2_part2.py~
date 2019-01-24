@@ -1,0 +1,35 @@
+# File:        hw2_part2.py
+# Author:      Eric Gronda
+# Date:        9/17/17
+# Section:     06
+# E-mail:      gt32930@umbc.edu
+# Description: Asks user for a number, then rounds it up or down.
+
+def main():
+
+
+    number = float(input("Input the number you are rounding: "))
+    rounding = input("Do you want to round up or down? ")
+
+    if(float(number) == int(number)):
+
+        print("Original value:" , number)
+        print("Rounded value" , int(number))
+
+    else:
+
+        if (rounding == "down"):
+
+            print("Original Value:" , number)
+            print("Rounding down...")
+            number = int(number // 1)
+            print("Rounded value:" , number)
+
+        elif (rounding == "up"):
+        
+            print("Original value:" , number)
+            print("Rounding up...")
+            number = int((number + 1) // 1)
+            print("Rounded number:" , number)
+
+main()

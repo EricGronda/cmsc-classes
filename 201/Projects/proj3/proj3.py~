@@ -1,0 +1,251 @@
+# File:    proj3.py
+# Author:  Eric Gronda
+# Date:    11/27/17
+# Section: 06
+# E-mail:  gt32930@umbc.edu
+# Description:
+#     Project 3: Maze Solver imports data from a file, converts it into
+#     a maze, then finds a complete solution path
+
+# CONSTANTS
+
+RIGHT  = 0 
+BOTTOM = 1
+LEFT   = 2
+TOP    = 3
+
+OPEN   = 0
+CLOSED = 1
+
+##########################################################################
+# getValidInput() determines whether a number is between a maximum
+#                 and a minimum value by re-prompting
+# Input:          minn; an int, a minimum value for the number
+#                 maxx; an int, a maximum value for the number
+#                 num;  an int, number to be validated
+# Output:         num;  an int, the validated number
+def getValidInput(minn , maxx , num):
+    prompt =  "Invalid, enter a number between "
+    prompt += str(minn) + " and " + str(maxx) + " (inclusive): "
+
+    # if number is out of bounds, reprompt
+    if num > maxx or num < minn:
+        validNum = False
+        while validNum == False:
+            validNum = True
+
+            # reprompt if num is out of bounds
+            if num > maxx or num < minn:
+                validNum = False
+                num = int(input(prompt))
+    
+    return num
+
+##########################################################################
+# makeList() converts a string of integers into a list
+# Input:     string;  a string, string to be split into a list of numbers
+# Output:    numList; a list, list of integers
+def makeList(string):
+    # remove whitespace by splitting
+    numList = string.strip().split()
+
+    # convert all nums in list to integers
+    for i in range( len(numList) ):
+        numList[i] = int(numList[i])
+
+    return numList
+
+##########################################################################
+# deepCopy() deep copies a 2D list
+# Input:     list2D;   2D list to be copied
+# Output:    deepList; deep copy of list2D
+def deepCopy(list2D):
+    # first layer (path)
+    deepList = list2D[:]
+    
+    # second layer (point)
+    for i in range( len(list2D) ):
+        deepList[i] = list2D[i][:]
+        
+    return deepList
+        
+##########################################################################
+# readMaze() reads in the maze specification from the filename specified
+#            and returns a maze data structure
+# Input:     filename; name of the file to read in maze data
+# Output:    maze;     3D list of the maze
+#            finish;   list of row and column for finish point in maze
+def readMaze(filename):
+    # open file
+    ifp = open(filename , "r")
+
+    # first line contains number of rows and columns ( [row , col] )
+    dimensions = makeList( ifp.readline() )
+    numRows    = dimensions[0]
+    numCols    = dimensions[1]
+    # second line specifies finish row and column
+    finish = makeList( ifp.readline() )
+
+    # create list for maze
+    maze = []
+    # add rows
+    for i in range( numRows ):
+        maze.append([])
+        # add squares
+        for j in range( numCols ):
+            square = makeList( ifp.readline() )
+            maze[i].append( square )
+
+    # close file
+    ifp.close()
+
+    return maze , finish
+
+##########################################################################
+# searchMaze() uses recursion to find a solution path to maze
+# Input:       maze;   3D list, maze containing rows, columns, walls
+#              row;    an int,  current row in maze
+#              col;    an int,  current column in maze
+#              finish; a list,  conatins the values for ending row/column
+#              path;   2D list, current path in maze
+# Output:      path;   2D list, complete solution path (if none found,
+#                               then value of None)
+def searchMaze(maze , row , col , finish , path):
+    # BASE CASE
+    
+    # if finish
+    if [row , col] == finish:
+        # add end point
+        path.append( finish )
+
+        # DEBUG
+        print("DEBUG: FINISH")
+        print(path)
+        
+        return path
+
+    # if in a box
+    elif OPEN not in maze[row][col]:
+        
+        return None
+    
+    ####################################################
+    # RECURSIVE CASE
+
+    # if there is somewhere to go
+    elif OPEN in maze[row][col]:
+        
+        # if right is open and a new spot
+        if maze[row][col][RIGHT] == OPEN and [row , col + 1] not in path:
+            # add point to list
+            path.append( [row , col] )
+        
+            # DEBUG
+            print(path)
+            print("DEBUG: GOING RIGHT")        
+            print("DEBUG: Moving to row" , row , "and col" , (col + 1) )
+
+            # move right
+            oldPath = deepCopy(path)
+            path = searchMaze(maze , row , (col + 1) , finish , oldPath)
+
+        # if bottom is open and a new spot
+        if maze[row][col][BOTTOM] == OPEN and [row + 1 , col] not in path:
+            # add point to list
+            path.append( [row , col] )
+
+            # DEBUG
+            print(path)
+            print("DEBUG: GOING DOWN")
+            print("DEBUG: Moving to row" , row + 1 , "and col" , col )
+
+            # move down
+            oldPath = deepCopy(path)
+            path = searchMaze(maze , (row + 1) , col , finish , oldPath)
+
+        # if left is open and a new spot
+        if maze[row][col][LEFT] == OPEN and [row , col - 1] not in path:
+            # add point to list
+            path.append( [row , col] )
+
+            # DEBUG
+            print(path)
+            print("DEBUG: GOING LEFT")
+            print("DEBUG: Moving to row" , row , "and col" , (col - 1) )
+
+            # move left
+            oldPath = deepCopy(path)
+            path = searchMaze(maze , row , (col - 1) , finish , oldPath)
+
+        # if top is open and a new spot
+        if maze[row][col][TOP] == OPEN and [row - 1 , col] not in path:
+            # add point to list
+            path.append( [row , col] )
+
+            # DEBUG
+            print(path)
+            print("DEBUG: GOING UP")
+            print("DEBUG: Moving to row" , row - 1 , "and col" , col )
+
+            # move up
+            oldPath = deepCopy(path)
+            path = searchMaze(maze , (row - 1) , col , finish , oldPath)
+
+        # if the point is a dead end
+        if finish not in path:
+            # remove the point
+            print("DEBUG: DEAD END")
+            path.remove( path[len(path) - 1] )
+            print(path)
+            
+        return path
+
+    # BAD SOLUTION: RETURN SLICE OF LIST UP TO FINISH
+    # find finish
+    ###for i in range( len(path) ):
+        ###if path[i] == finish:
+            ###path = path[ :i - 1]
+
+
+
+    return path
+
+##########################################################################
+# results() displays results of the maze search
+# Input:    path; complete solution path
+# Output:   None  (prints to the screen)
+###def results(path):
+    # if there is no solution:
+    ###if path == None:
+        
+
+def main():
+
+    # display opening statement
+    print("Welcome to the Maze Solver!")
+
+    # create 3D list of maze from external file
+    fileName = input("Please enter the filename of the maze: ")
+    maze , finish  = readMaze(fileName)
+    
+    # get maze data
+    maxRow = len( maze )  - 1
+    maxCol = len(maze[0]) - 1
+
+    # get starting row and column
+    rowStart = int(input("Please enter the starting row: "))
+    rowStart = getValidInput( 0 , maxRow , rowStart )
+    colStart = int(input("Please enter the starting column: "))
+    colStart = getValidInput( 0 , maxCol , colStart)
+
+    # search the maze for a solution
+    path = [ ]
+    path = searchMaze(maze, rowStart , colStart , finish , path)
+
+    print()
+    print(path)
+
+    # display results
+    ###results()
+
+main()

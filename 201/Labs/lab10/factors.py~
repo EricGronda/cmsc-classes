@@ -1,0 +1,33 @@
+# File:        factors.py
+# Author:      Eric Gronda
+# Date:        11/6/17
+# Section:     06
+# E-mail:      gt32930@umbc.edu
+# Description: 
+#    asks for a number, then prints out all of the factors of tha number
+
+
+def getValidInput(prompt , minn):
+    userNum = int(input(prompt))
+    validVal = False
+    
+    while validVal == False:
+        
+        # if value is less that minimum, reprompt
+        if userNum < minn:
+            print("Invalid num")
+            userNum = int(input(prompt))
+
+    return userNum
+        
+
+def main():
+
+
+    # ask for a num
+    prompt = "Please enter a number greter than 0:"
+    userNum = getValidInput(prompt , 0)
+    
+
+
+main()

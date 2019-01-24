@@ -1,0 +1,11 @@
+# File:        hw1_part3.py
+# Author:      Eric Gronda
+# Date:        9/11/17
+# Section:     01
+# Description: Ask the user for information about a restaurant and print a summary of that information
+
+nameInfo = input("What is the restaurant's name? ")
+foodInfo = input("What food does the restaurant serve? ")
+ratingInfo = input("What is the restaurant's star rating? ")
+
+print(nameInfo , "is a" , ratingInfo , "star restaurant, serving" , foodInfo ,         "food.")
