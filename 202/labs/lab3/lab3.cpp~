@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+// max number of elements in the array
+const int NUMBER_OF_ELEMENTS = 25;
+
+// Function prototypes - do not change!
+void reverse(int data[] , int dataLen);
+
+int main(){
+  int arr[NUMBER_OF_ELEMENTS];
+  int numElements = 0;
+  int inputValue;
+
+  /////////////////////////////////////////////////
+  // CODE TO READ ELEMENTS OF ARRAY FRO KEYBOARD
+  /////////////////////////////////////////////////
+  do{
+    cout << "Enter a number (-1 when done):" << endl;
+    cin >> inputValue;
+    numElements += 1;
+  }while(userVal != -1);
+
+  /////////////////////////////////////////////////
+  // CODE TO PRINT ELEMENTS OF ARRAY GOES HERE
+  /////////////////////////////////////////////////
+  cout << "Contents of array: ";
+  for(int i = 0; i < numElements - 1 ; i++){
+    cout << arr[i] << ", "
+  }
+  cout << arr[numElements - 1] << endl;
+
+  return 0;
+}

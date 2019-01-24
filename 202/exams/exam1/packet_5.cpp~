@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+void absoluteValue(int*);
+
+int main(){
+  int input;
+  int *inPtr = &input;
+ 
+  cin >> input;
+  absoluteValue(*inPtr);
+  cout << "Abs val: " << input << endl;
+  
+  return 0;
+}
+
+void absolutValue(int *ptr){
+  if(*ptr >= 0){
+    *ptr = *ptr;
+  }else{
+    *ptr = -*ptr;
+  }
+}

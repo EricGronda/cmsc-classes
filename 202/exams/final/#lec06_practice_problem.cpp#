@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+void makeChange(int);
+
+int main(){
+  int cents = 117;
+
+  makeChange(cents);
+}
+
+void makeChange(int cents){
+  int quarters , dimes , nickels , pennies;
+  if(cents % 25 == 0){
+    quarters = cents / 25;
+    cout
+  }
+  = cents / 25;
+
+}

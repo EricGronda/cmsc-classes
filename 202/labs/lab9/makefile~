@@ -1,0 +1,21 @@
+CXX = g++
+CXX_FLAGS = -Wall
+
+lab9: Emp.o Manager.o Developer.o main.cpp
+	$(CXX) $(CXX_FLAGS) Emp.o Manager.o Developer.o main.cpp -o lab9
+
+Developer.o: Developer.h Developer.cpp
+	$(CXX) $(CXX_FLAGS) Developer.cpp -c Developer.o
+
+Manager.o: Manager.h Manager.cpp
+	$(CXX) $(CXX_FLAGS) Manager.cpp -c Manager.o
+
+Emp.o: Emp.h Emp.cpp
+	$(CXX) $(CXX_FLAGS) Emp.cpp -c Emp.o
+
+run:
+	./lab9
+
+clean:
+	rm *.o*
+	rm *~

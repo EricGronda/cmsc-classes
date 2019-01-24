@@ -1,0 +1,21 @@
+/***********************************
+ * Practice sheet:
+ * [ ] pass by reference
+ * [ ] pointers
+ * [ ] classes
+ * [ ] arrays
+ * [ ] c-strings
+ * [ ] precision
+ **********************************/
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(){
+  // Problem 1
+
+  // Problem 1: multiply 2 ints by reference
+  
+
+  return 0;
+}

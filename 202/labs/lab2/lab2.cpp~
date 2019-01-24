@@ -1,0 +1,94 @@
+/*
+*
+*
+*
+*
+*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// declarations
+
+// getName
+string getName();
+
+// get age
+int getAge();
+
+// printLetter
+int printLetter(int);
+
+
+int main() {
+  // initialize variables
+  string name;
+  int age;
+
+  // get the name of user
+  name = getName();
+
+  // get the age of user
+  age = getAge();
+
+  // print final statement
+  cout << name << " is in the " << printLetter(age) << "generation";
+
+  return 0;
+}
+
+string getName() {
+  string name;
+  cout << "Enter your name:" << endl;
+  getline(cin , name);
+
+  return name;
+}
+
+int getAge() {
+  int age;
+
+  cout << "Enter your age (>= 0):" << endl;
+  cin >> age;
+  cout << endl;
+  
+  while(age < 0){
+    cout << "Enter your age (>= 0):" << endl;
+    cin >> age << endl;
+  }
+
+  return age
+}
+
+int printLetter(int age) {
+  string ageGroup;
+  
+  switch(age){
+    
+  case 0 - 34:
+    ageGroup = "millenial";
+    break;
+
+  case 35 - 50:
+    ageGroup = "Gen X";
+    break;
+
+  case 51 - 69:
+    ageGroup = "Boomer";
+    break;
+
+  case 70 - 87:
+    ageGroup = "Silent";
+    break;
+
+  default:
+    ageGroup = "Greatest";
+    break;
+
+  }
+
+  cout << ageGroup;
+  
+  return None
+}

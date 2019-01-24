@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+class MyBirthday {
+  int m_year = 1999;
+  int m_month = 07;
+  int m_day = 07;
+
+};
+
+int main() {
+  MyBirthday happy;
+
+  cout << "Year:  " << happy.m_year << endl;
+  cout << "Month: " << happy.m_month << endl;
+  cout << "Day:   " << happy.m_day << endl;
+
+  return 0;
+}

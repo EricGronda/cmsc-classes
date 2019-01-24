@@ -1,0 +1,198 @@
+/******************************************************
+ * File:    Dragon.cpp
+ * Author:  Eric Gronda
+ * Date:    3/27/18
+ * Section: 04
+ * E-mail:  eric.gronda@umbc.edu
+ * Description:
+ *     Contains all of the function definitions for
+ *     Dragon class in Project 2: Dragon Wars
+ *****************************************************/
+
+#include "Dragon.h"
+using namespace std;
+
+const string ENEMY_BREATH  = "The enemy has used a breath attack!";
+const string PLAYER_BREATH = "Your Dragon has used a breath attack!";
+const string NO_BREATH     = "Nobody used a breath attack";
+
+// Name: Dragon() - Overloaded constructor
+// Desc - Used to build a new dragon
+// Preconditions - Requires name, type, isHatched, curSize, maxSize, and rarity (from file)
+// Postconditions - Creates a new dragon
+Dragon::Dragon(string name, string type, bool isHatched, dragonSize curSize,
+	       dragonSize maxSize, int rarity){
+  m_name      = name;
+  m_type      = type;
+  m_isHatched = isHatched;
+  m_curSize   = curSize;
+  m_maxSize   = maxSize;
+  m_rarity    = rarity;
+}
+
+
+// Name: GetName()
+// Desc - Getter for Dragon name
+// Preconditions - Dragon exists
+// Postconditions - Returns the name of the dragon
+string Dragon::GetName(){
+  return m_name;
+}
+// Name: SetName(string)
+// Desc - Allows the user to change the name of the dragon
+// Preconditions - Dragon exists
+// Postconditions - Sets name of dragon
+void Dragon::SetName(string name){
+  m_name = name;
+}
+
+
+// Name: GetType()
+// Desc - Getter for dragon type
+// Preconditions - Dragon Exists
+// Postconditions - Returns the type of the dragon
+string Dragon::GetType(){
+  return m_type;
+}
+// Name: SetType(string)
+// Desc - Allows the user to change the type of the dragon
+// Preconditions - Dragon exists
+// Postconditions - Sets type of dragon
+void Dragon::SetType(string type){
+  m_type = type;
+}
+
+
+// Name: GetIsHatched()
+// Desc - Getter for if dragon is hatched
+// Preconditions - Dragon exists
+// Postconditions - Returns if the dragon has hatched from an egg
+bool Dragon::GetIsHatched(){
+  return m_isHatched;
+}
+// Name: HatchDragon()
+// Desc - Setter for if dragon is hatched
+// Preconditions - Unhatched Dragon (In Egg form) exists
+// Postconditions - If unhatched, changes isHatched to 1
+void Dragon::HatchDragon(){
+  if(m_isHatched == 0){
+    m_isHatched = 1;
+  }
+}
+
+
+// Name: GetCurSize()
+// Desc - Getter for dragon's current size
+// Preconditions - Dragon exists
+// Postconditions - Returns current size from 1 - 5
+dragonSize Dragon::GetCurSize(){
+  return m_curSize;
+}
+// Name: SetCurSize(int)
+// Desc - Setter for the current dragon size
+// Preconditions - Dragon exists
+// Postconditions - Sets size of dragon (1-5)
+void Dragon::SetCurSize(dragonSize curSize){
+  m_curSize = curSize;
+}
+
+
+// Name: GetMaxSize()
+// Desc - Getter for dragon max size
+// Preconditions - Dragon exists
+// Postconditions - Returns maximum size from 1 - 5
+dragonSize Dragon::GetMaxSize(){
+  return m_maxSize;
+}
+// Name: SetMaxSize(int)
+// Desc - Setter for the maximum dragon size
+// Preconditions - Dragon exists
+// Postconditions - Sets maximum size of dragon (1-5)
+void Dragon::SetMaxSize(dragonSize maxSize){
+  m_maxSize = maxSize;
+}
+
+
+// Name: GetRarity()
+// Desc - Getter for dragon rarity
+// Preconditions - Dragon exists
+// Postconditions - Returns rarity of dragon (1-10)
+int Dragon::GetRarity(){
+  return m_rarity;
+}
+// Name: SetRarity()
+// Desc - Setter for dragon rarity
+// Preconditions - Dragon exists
+// Postconditions - Sets rarity of dragon from (1-10)
+void Dragon::SetRarity(int rarity){
+  m_rarity = rarity;
+}
+
+
+// Name: AttemptGrow()
+// Desc - After a dragon wins a fight, if possible, it grows larger
+// Preconditions - Dragons exist
+// Postconditions - If possible, curSize increases, if increases, returns true else false
+bool Dragon::AttemptGrow(){
+  if(m_curSize < m_maxSize){
+    cout << "Your dragon grows a bit larger." << endl;
+    m_curSize = (dragonSize)((int)m_curSize + 1);
+    return true;
+
+  }else{
+    cout << "Your dragon cannot grow any larger." << endl;
+    return false;
+  }
+}
+
+
+// Name: AttackDragon(Dragon&)
+// Desc - Allows the user to attack an enemy dragon
+// Preconditions - Dragons exist
+// Postconditions - Returns if dragon lives or dies (true lives, dies false)
+bool Dragon::AttackDragon(Dragon& enemyDragon){
+  srand(time(NULL));
+
+  int enemySize = rand() % (enemyDragon.GetMaxSize() - 1);
+  string breath = BreathAttack();
+
+  // chance for breath attack
+  if(breath == PLAYER_BREATH){
+    cout << PLAYER_BREATH << endl;
+    return true;
+  }
+  else if(breath == ENEMY_BREATH){
+    cout << ENEMY_BREATH << endl;
+    return false;
+  }
+  
+  // compare sizes
+  if(m_curSize < enemySize )
+    return false;
+  else if(m_curSize > enemySize)
+    return true;
+  else{
+    cout << "The battle results in a draw." << endl;
+    return true;
+  }
+}
+
+
+// Name: BreathAttack(Dragon&)
+// Desc - Allows the user to attack an enemy dragon using a 
+//          special breath attack
+//        Returns the string of the specific attack 
+//          (different for acid, water, ice, fire, wind)
+// Preconditions - During normal attack, 5% chance a special 
+//                   breath attack called
+// Postconditions -  Automatically kills enemy dragon
+string Dragon::BreathAttack(){
+  srand(time(NULL));
+
+  if(rand() % 100 < 5) // enemy breath attack
+    return ENEMY_BREATH;
+  if(rand() % 100 < 5) // player breath attack
+    return PLAYER_BREATH;
+
+  return NO_BREATH;
+}

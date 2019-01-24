@@ -1,0 +1,58 @@
+#include "Produce.h"
+#include <string>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// fill vector - fills produce info
+// vector<Produce>& - produce in your grocery list
+void fillVector(vector<Produce>&);
+
+// printVectorWithIterator - prints the information 
+// of all produce using unsigned int
+void printVectorWithIterator(vector<Produce>&);
+
+// printVectorWithoutIterator - prints the information 
+// of all produce using the ::iterator
+void printVectorWithoutIterator(vector<Produce>&);
+
+int main () {
+  //Creates a new vector of produce for your grocery list
+  vector<Produce> myGroceryList;
+
+  //Populates the vector
+  fillVector(myGroceryList);
+
+  cout << "Grocery List using unsigned int: " << endl;
+  // Prints the contents of the vector using unsigned int
+  printVectorWithoutIterator(myGroceryList);  
+
+  cout << "\n";
+  cout  << "Grocery List using the ::iterator:" << endl;
+  // Prints the contents of the vector using ::iterator 
+  printVectorWithIterator(myGroceryList);
+  
+  return 0;
+}
+
+void fillVector(vector<Produce>& newGroceryList) {
+
+  //Write this function
+  //Needs to ask how many items/produce
+  //Gets produce name, price, and barcode of the item
+  
+  //Needs to add produce to the vector
+ 
+
+}
+
+void printVectorWithoutIterator(vector<Produce>& newGroceryList){
+  // Print out the vector using unsigned int
+
+}
+void printVectorWithIterator(vector<Produce>& newGroceryList){
+  // Print out the vector using ::iterator
+
+}
+

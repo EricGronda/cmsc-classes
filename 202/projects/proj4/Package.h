@@ -1,0 +1,39 @@
+/***************************************************************
+ * File:    Package.h
+ * Editor:  Eric Gronda
+ * Date:    4/24/18
+ * Section: 04
+ * Description:
+ *    Header file for Package class in PROJ4: UMBC Shipping
+ **************************************************************/
+#ifndef PACKAGE_H
+#define PACKAGE_H
+
+#include "Mail.h"
+
+class Package:public Mail{
+ public:
+  // Default Constructor
+  // Preconditions: None
+  // Postconditions: None
+  Package();
+  
+  // Overloaded Constructor
+  // Preconditions: valid inputs
+  // Postconditions: None
+  Package(int, string, string, float, float);
+  
+  // Destructor
+  // Preconditions: Allocated object
+  // Postconditions: Deallocates object from memory
+  ~Package();
+  
+  // toString() - Converts the Package object to a string object
+  // Preconditions: A valid Package object
+  // Postconditions: returns a string representation of a Package
+  string toString();
+  
+};
+
+
+#endif
